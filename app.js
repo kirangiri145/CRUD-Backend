@@ -1,12 +1,24 @@
 const express = require("express");
 const app = express();
-const Path = require('path');
-const userModel = require('./models/user');
+const Path = require("path");
+const multer = require("multer");
+const userModel = require("./models/user");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, Path.join(__dirname, "public/uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
-app.use(express.static(Path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(Path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -47,8 +59,8 @@ app.get("/edit/:userid", async (req, res) => {
 
 app.post("/update/:userid", async (req, res) => {
   try {
-    let { image, email, name } = req.body;
-    let user = await userModel.findOneAndUpdate(
+    const { name, email, image } = req.body;
+    const user = await userModel.findOneAndUpdate(
       { _id: req.params.userid },
       { name, email, image },
       { new: true }
@@ -63,10 +75,16 @@ app.post("/update/:userid", async (req, res) => {
   }
 });
 
-app.post("/create", async (req, res) => {
+app.post("/create", upload.single("imageFile"), async (req, res) => {
   try {
-    let { name, email, image } = req.body;
-    await userModel.create({ name, email, image });
+    const { name, email, imageUrl } = req.body;
+    let imagePath = imageUrl;
+
+    if (req.file) {
+      imagePath = `/uploads/${req.file.filename}`;
+    }
+
+    await userModel.create({ name, email, image: imagePath });
     res.redirect("/read");
   } catch (err) {
     console.error(err);
