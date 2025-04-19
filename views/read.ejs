@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Users</title>
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="min-h-screen w-full bg-zinc-900 p-5 sm:p-10 text-white">
+      
+      <!-- Back to Home Button -->
+      <div class="w-full flex justify-center mb-4">
+        <a class="text-blue-500 text-base sm:text-lg hover:underline" href="/">Back To Home</a>
+      </div>
+
+      <!-- All Users Title -->
+      <h1 class="text-2xl sm:text-3xl mb-8 tracking-tight text-center">All Users</h1>
+
+      <!-- User Cards -->
+      <div class="users flex flex-wrap gap-5 justify-center">
+        <% if (users.length > 0){ %>
+          <% users.forEach(function(user){%>
+            <div class="user w-full sm:w-72 p-4 bg-zinc-800 rounded-lg">
+              <div class="w-full h-72 rounded-lg bg-zinc-700 overflow-hidden">
+                <img
+                  class="w-full h-full object-cover object-top"
+                  src="<%= user.image %>"
+                  alt="<%= user.name %>"
+                />
+              </div>
+              <h3 class="text-xl mt-3 tracking-tighter"><%= user.name %></h3>
+              <h5 class="text-zinc-500 break-words"><%= user.email %></h5>
+              <div class="flex justify-between mt-5">
+                <a class="text-zinc-200 hover:underline" href="/edit/<%= user._id %>">Edit Users</a>
+                <a class="text-red-600 hover:underline" href="/delete/<%= user._id %>">Delete Users</a>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <h3 class="text-zinc-400 text-center w-full">No User Yet.</h3>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

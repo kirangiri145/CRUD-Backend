@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update User</title>
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-zinc-900 p-5 sm:p-10 text-white flex flex-col items-center">
+
+      <!-- Read Users Link -->
+      <div class="w-full flex justify-center mb-6">
+        <a class="text-blue-500 text-base sm:text-lg hover:underline" href="/read">← Read Users</a>
+      </div>
+
+      <!-- Form Container -->
+      <div class="w-full max-w-xl">
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-center mb-8">Update User</h1>
+
+        <form
+          action="/update/<%= user._id %>"
+          method="POST"
+          class="flex flex-col gap-5 w-full px-3 sm:px-0"
+        >
+          <!-- Name Input -->
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value="<%= user.name %>"
+            required
+            class="px-5 py-2 border border-zinc-700 rounded-lg bg-zinc-800 text-white placeholder-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+
+          <!-- Email Input -->
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value="<%= user.email %>"
+            required
+            class="px-5 py-2 border border-zinc-700 rounded-lg bg-zinc-800 text-white placeholder-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+
+          <!-- Image Input -->
+          <input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value="<%= user.image %>"
+            class="px-5 py-2 border border-zinc-700 rounded-lg bg-zinc-800 text-white placeholder-zinc-400 outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+
+          <!-- Submit Button -->
+          <input
+            type="submit"
+            value="Update User"
+            class="px-5 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-lg cursor-pointer transition"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

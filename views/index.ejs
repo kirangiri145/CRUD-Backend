@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create User</title>
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="min-h-screen w-full bg-zinc-900 p-5 sm:p-10 text-white flex flex-col items-center">
+      
+      <!-- Read Users Link -->
+      <div class="w-full text-center mb-6">
+        <a class="text-blue-700 text-base sm:text-lg hover:underline" href="/read">← Read Users</a>
+      </div>
+
+      <!-- Form Section -->
+      <div class="w-full max-w-2xl">
+        <h1 class="text-2xl sm:text-3xl tracking-tight text-center mb-8">Create User</h1>
+
+        <form
+          action="/create"
+          method="post"
+          class="flex flex-col gap-5 w-full px-3 sm:px-0 md:w-2/3 mx-auto"
+        >
+          <input
+            class="px-5 py-2 border-2 border-zinc-800 outline-none rounded-lg bg-transparent"
+            type="text"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            class="px-5 py-2 border-2 border-zinc-800 outline-none rounded-lg bg-transparent"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            class="px-5 py-2 border-2 border-zinc-800 outline-none rounded-lg bg-transparent"
+            type="text"
+            name="image"
+            placeholder="Image URL"
+          />
+          <input
+            class="px-5 py-2 bg-blue-500 text-black font-semibold rounded-lg cursor-pointer hover:bg-blue-400 transition"
+            type="submit"
+            value="Create User"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
