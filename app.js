@@ -3,6 +3,11 @@ const app = express();
 const Path = require("path");
 const multer = require("multer");
 const userModel = require("./models/user");
+const fs = require("fs");
+const uploadPath = Path.join(__dirname, "public/uploads");
+if (!fs.existsSync(uploadPath)) {
+    fs.mkdirSync(uploadPath, { recursive: true });
+  }
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
